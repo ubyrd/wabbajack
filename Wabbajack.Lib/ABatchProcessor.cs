@@ -99,8 +99,8 @@ namespace Wabbajack.Lib
             Utils.Log($"{raw_speed.ToFileSizeString()}/sec for {folder}");
             int speed = (int)(raw_speed / 1024 / 1024);
 
-            // Less than 200, it's probably a HDD, so we can't go higher than 2
-            if (speed < 200) return 2;
+            // Less than 200, it's probably a HDD, so we can't go higher than 4
+            if (speed < 200) return 4;
             // SATA SSD, so stick with 8 thread maximum
             if (speed < 600) return Math.Min(Environment.ProcessorCount, 8);
             // Anything higher is probably a NVME or a really good SSD, so take off the reins
