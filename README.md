@@ -18,7 +18,7 @@ dotnet build
 ```
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;you can find binary files in  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`...\wabbajack\Wabbajack\bin\...`.  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`...\wabbajack\Wabbajack\bin\...`  
 
 3. Download Steam from: https://store.steampowered.com/  
 4. Run Steam at once. You can no login.  
