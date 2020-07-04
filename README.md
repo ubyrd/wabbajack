@@ -1,15 +1,15 @@
 Wabbajack
 ===
   
-Branch with auto button pressing for non premium Nexus users.  
+Branch with auto mods downloading for non premium Nexus users.  
 
 Also you can find here installation guide for non-steam versions of games:  
 1. Install .NET Core SDK from: https://dotnet.microsoft.com/download  
 2. Run:  
 ```bash
 # you can also just download zip archive instead of using git:
-# https://github.com/wabbajack-tools/wabbajack/archive/2.0-release-day-bug-fixes.zip
-git clone
+# https://github.com/ubyrd/wabbajack/archive/2.1.0.0-auto-non-premium.zip
+git clone https://github.com/ubyrd/wabbajack.git
 cd wabbajack
 git checkout 2.1.0.0-auto-non-premium
 
@@ -22,7 +22,6 @@ dotnet build
 
 3. Download Steam from: https://store.steampowered.com/  
 4. Run Steam at once. You can no login.  
-ghjgh
 5. (example for Skyrim SE) Create file at  
 `C:\Program Files (x86)\Steam\steamapp\appmanifest_489830.acfs`  
 with next content:  
@@ -51,4 +50,4 @@ with next content:
 	}
 }
 ```
-6. Install modlist from one of guides: https://www.wabbajack.org/modlists/gallery/  
+6. Now you can install modlist from one of official guides: https://www.wabbajack.org/modlists/gallery/  
