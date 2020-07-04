@@ -176,7 +176,7 @@ namespace Wabbajack
 
                     flag = false;
                 }
-				await browser.EvaluateJavaScript($"var aTags = document.getElementsByTagName(\"a\"); for (var i = 0; i < aTags.length; i++) { if (aTags[i].textContent == \"click here\") { aTags[i].click(); break; } }");
+				await browser.EvaluateJavaScript("var aTags = document.getElementsByTagName(\"a\"); for (var i = 0; i < aTags.length; i++) { if (aTags[i].textContent == \"click here\") { aTags[i].click(); break; } }");
 				await Task.Delay(500);
             }
         }
