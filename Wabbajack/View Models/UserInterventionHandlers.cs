@@ -149,12 +149,7 @@ namespace Wabbajack
         {
             var state = manuallyDownloadNexusFile.State;
             var game = state.Game.MetaData();
-            var hrefs = new[]
-            {
-                $"/Core/Libs/Common/Widgets/DownloadPopUp?id={state.FileID}&game_id={game.NexusGameId}",
-                $"https://www.nexusmods.com/{game.NexusName}/mods/{state.ModID}?tab=files&file_id={state.FileID}",
-                $"/Core/Libs/Common/Widgets/ModRequirementsPopUp?id={state.FileID}&game_id={game.NexusGameId}"
-            };
+            var href = $"https://www.nexusmods.com/{game.NexusName}/mods/{state.ModID}?tab=files&file_id={state.FileID}";
             await vm.Driver.WaitForInitialized();
             IWebDriver browser = new CefSharpWrapper(vm.Browser);
             vm.Instructions = $"Please Download {state.Name} - {state.ModID} - {state.FileID}";
@@ -163,20 +158,25 @@ namespace Wabbajack
                 manuallyDownloadNexusFile.Resume(uri);
                 browser.DownloadHandler = null;
             };
-            await browser.NavigateTo(NexusApiClient.ManualDownloadUrl(manuallyDownloadNexusFile.State));
+            await browser.NavigateTo(new Uri(href));
 
             var buttin_href = $"/Core/Libs/Common/Widgets/DownloadPopUp?id={manuallyDownloadNexusFile.State.FileID}&game_id={Game.SkyrimSpecialEdition}";
 
+            bool flag = true;
             while (!cancel.IsCancellationRequested && !manuallyDownloadNexusFile.Task.IsCompleted) {
-                await browser.EvaluateJavaScript(
-                    @"Array.from(document.getElementsByClassName('accordion')).forEach(e => Array.from(e.children).forEach(c => c.style=''))");
-                foreach (var href in hrefs)
-                {
-                    const string style = "border-thickness: thick; border-color: #ff0000;border-width: medium;border-style: dashed;background-color: teal;padding: 7px";
-                    await browser.EvaluateJavaScript($"Array.from(document.querySelectorAll('.accordion a[href=\"{href}\"]')).forEach(e => {{e.scrollIntoView({{behavior: 'smooth', block: 'center', inline: 'nearest'}}); e.setAttribute('style', '{style}');}});");
+                await browser.EvaluateJavaScript(@"Array.from(document.getElementsByClassName('accordion')).forEach(e => Array.from(e.children).forEach(c => c.style=''))");
+
+                if (flag) {
+                    const string download_button = "document.getElementById(\"slowDownloadButton\")";
+                    const string style = "border-thickness: thick; border-color: #ff0000; border-width: medium; border-style: dashed; background-color: teal; padding: 7px";
+
+                    await browser.EvaluateJavaScript($"{download_button}.setAttribute('style', '{style}');");
+                    await Task.Delay(500);
+                    await browser.EvaluateJavaScript($"{download_button}.click();");
+
+                    flag = false;
                 }
                 await Task.Delay(250);
-                
             }
         }
     }
